@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "MINDSPARK",
+    "slug": "mindspark",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": { "image": "./assets/splash-icon.png", "resizeMode": "contain", "backgroundColor": "#0b0b2b" },
+    "ios": {
+      "bundleIdentifier": "com.mindspark.game",
+      "buildNumber": "1",
+      "supportsTablet": true,
+      "infoPlist": { "ITSAppUsesNonExemptEncryption": false }
+    },
+    "android": {
+      "package": "com.mindspark.game",
+      "versionCode": 1,
+      "permissions": [],
+      "adaptiveIcon": { "foregroundImage": "./assets/adaptive-icon.png", "backgroundColor": "#0b0b2b" }
+    },
+    "plugins": ["expo-splash-screen"],
+    "extra": { "supportUrl": "https://YOUR-NAME.github.io/mindspark/support.html" }
+  }
+}
