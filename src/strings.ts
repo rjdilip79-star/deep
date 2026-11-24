@@ -1,0 +1,9 @@
+export const EXTRA=[
+{route:'Memory',ic:'🧠',c:'#8b5cff',n:['Memory Rush','मेमोरी खेल'],d:['Train your memory','स्मरणशक्ति बढाउनुहोस्']},
+{route:'Imagine',ic:'🎨',c:'#ff5fd2',n:['Imagine Lab','कल्पना ल्याब'],d:['Creative thinking','सिर्जनात्मक सोच']},
+{route:'Speed',ic:'⚡',c:'#ffb020',n:['Speed Brain','छिटो दिमाग'],d:['Think quickly','छिटो सोच्नुहोस्']}
+];
+export const UI:any={
+en:{home:'Home',daily:'Daily',awards:'Awards',settings:'Settings',hi:'Welcome back',xp:'XP',level:'Level',streak:'Day streak',games:'Choose your game',dailyDone:'Completed today',dailyReady:'Daily challenge ready',q:'Question',right:'Correct! 🎉',wrong:'Try again next time.',next:'Next',finish:'Results',earned:'XP earned',tip:'Tip',back:'Back',again:'Play again',ach:'Achievements',progress:'Your progress',noAch:'Play games to unlock achievements',name:'Your name',lang:'Language',theme:'Theme',dark:'Dark',light:'Light',sound:'Sound',haptics:'Haptics',reset:'Reset progress',sure:'Erase all progress?',cancel:'Cancel',ok:'Reset',notFound:'Game not found'},
+ne:{home:'गृह',daily:'दैनिक',awards:'उपलब्धि',settings:'सेटिङ',hi:'स्वागत छ',xp:'XP',level:'स्तर',streak:'दिनको स्ट्रिक',games:'खेल छान्नुहोस्',dailyDone:'आज पूरा भयो',dailyReady:'आजको चुनौती तयार छ',q:'प्रश्न',right:'सही! 🎉',wrong:'अर्को पटक प्रयास गर्नुहोस्।',next:'अर्को',finish:'नतिजा',earned:'कमाएको XP',tip:'सुझाव',back:'फर्कनुहोस्',again:'फेरि खेल्नुहोस्',ach:'उपलब्धि',progress:'तपाईंको प्रगति',noAch:'उपलब्धि खोल्न खेल खेल्नुहोस्',name:'तपाईंको नाम',lang:'भाषा',theme:'थिम',dark:'अँध्यारो',light:'उज्यालो',sound:'आवाज',haptics:'कम्पन',reset:'प्रगति मेटाउनुहोस्',sure:'सबै प्रगति मेटाउने?',cancel:'रद्द',ok:'ठीक छ',notFound:'खेल भेटिएन'}
+};
