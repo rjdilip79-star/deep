@@ -11,8 +11,7 @@
     "preview": {
       "distribution": "internal",
       "android": {
-        "buildType": "apk",
-        "gradleCommand": ":app:assembleRelease --no-configure-on-demand"
+        "buildType": "apk"
       }
     },
     "production": {
