@@ -42,6 +42,14 @@ jobs:
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
         run: eas init --account rjdilip79s-team --force --non-interactive
+      - name: Check Expo dependency compatibility
+        run: npx expo install --check
+      - name: Run Expo Doctor
+        run: npx expo-doctor
+      - name: TypeScript check
+        run: npm run typecheck
+      - name: Verify Android JavaScript bundle
+        run: npx expo export --platform android
       - name: Build Android
         if: github.event_name == 'push' || github.event.inputs.platform == 'all' || github.event.inputs.platform == 'android'
         env:
