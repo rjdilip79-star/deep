@@ -1,0 +1,18 @@
+import React,{createContext,useContext,useEffect,useState} from 'react';
+import {View,Text,Pressable,ScrollView} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {UI} from './strings';
+export type St={xp:number;streak:number;last:string;plays:number;perfect:number;ach:string[];lang:'en'|'ne';theme:'auto'|'dark'|'light';name:string;sound:boolean;haptics:boolean;dailyDate:string;best:{memory:number;imagine:number;speed:number}};
+export const INIT:St={xp:0,streak:0,last:'',plays:0,perfect:0,ach:[],lang:'en',theme:'dark',name:'Player',sound:true,haptics:true,dailyDate:'',best:{memory:0,imagine:0,speed:0}};
+export const ACH=[{id:'first',ic:'✨',n:['First Spark','पहिलो चिन्गारी'],d:['Finish your first game','पहिलो खेल पूरा गर्नुहोस्']},{id:'perfect',ic:'💯',n:['Perfect Mind','पूर्ण दिमाग'],d:['Get a perfect score','पूर्ण अंक ल्याउनुहोस्']}];
+const dark={bg:'#100d2e',card:'#211b48',tx:'#f4f1ff',mu:'#b6b3dc',bd:'#49416f',ac:'#8b5cff',ac2:'#27d3ff',ok:'#3ee6a0',bad:'#ff6b8a'};
+const light={bg:'#f3f1ff',card:'#fff',tx:'#1c1650',mu:'#5a5590',bd:'#d6d0ed',ac:'#7650dc',ac2:'#008fb8',ok:'#07885a',bad:'#d62f56'};
+const Ctx=createContext<any>(null);
+export function Provider({children}:any){const [s,setS]=useState<St>(INIT);useEffect(()=>{AsyncStorage.getItem('mindspark').then(v=>{if(v)try{setS({...INIT,...JSON.parse(v)})}catch{}})},[]);useEffect(()=>{AsyncStorage.setItem('mindspark',JSON.stringify(s)).catch(()=>{})},[s]);const c=s.theme==='light'?light:dark;const t=(k:string)=>UI[s.lang][k]||k;const L=(v:any)=>Array.isArray(v)?v[s.lang==='en'?0:1]:v;const fx=()=>{};return <Ctx.Provider value={{s,set:setS,c,t,L,fx}}>{children}</Ctx.Provider>}
+export const useApp=()=>useContext(Ctx);
+export function useAward(){const {s,set}=useApp();return (xp:number,perfect:boolean)=>{const today=new Date().toDateString();const ach=[...s.ach];if(!ach.includes('first'))ach.push('first');if(perfect&&!ach.includes('perfect'))ach.push('perfect');set({...s,xp:s.xp+xp,plays:s.plays+1,perfect:s.perfect+(perfect?1:0),ach,last:today});return ach.filter(x=>!s.ach.includes(x));};}
+export const panel=(c:any)=>({backgroundColor:c.card,borderColor:c.bd,borderWidth:1,borderRadius:18,padding:16});
+export function Screen({children}:any){const {c}=useApp();return <ScrollView style={{flex:1,backgroundColor:c.bg}} contentContainerStyle={{padding:16,paddingBottom:36}}>{children}</ScrollView>}
+export function Btn({label,onPress,ghost}:any){const {c}=useApp();return <Pressable onPress={onPress} style={{backgroundColor:ghost?c.card:c.ac,borderColor:c.bd,borderWidth:ghost?1:0,padding:14,borderRadius:13,marginTop:12,alignItems:'center'}}><Text style={{color:'#fff',fontWeight:'800'}}>{label}</Text></Pressable>}
+export function Back({onPress}:any){const {t,c}=useApp();return <Pressable onPress={onPress} style={{paddingVertical:12}}><Text style={{color:c.ac2,fontWeight:'700'}}>‹ {t('back')}</Text></Pressable>}
+export function ResultCard({title,big,lines,tip,fresh,onAgain,onBack}:any){const {c,t}=useApp();return <View style={panel(c)}><Text style={{color:c.tx,fontSize:22,fontWeight:'800',textAlign:'center'}}>{title}</Text><Text style={{color:c.ac2,fontSize:52,fontWeight:'900',textAlign:'center'}}>{big}</Text>{lines.map((x:string)=><Text key={x} style={{color:c.tx,textAlign:'center'}}>{x}</Text>)}<Text style={{color:c.mu,marginTop:18}}>{t('tip')}: {tip}</Text>{fresh?.length>0&&<Text style={{color:c.ok,marginTop:8}}>✨ {t('ach')}: {fresh.join(', ')}</Text>}<Btn label={t('again')} onPress={onAgain}/><Btn label={t('back')} ghost onPress={onBack}/></View>}
