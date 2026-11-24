@@ -26,13 +26,17 @@ jobs:
         run: npm install
       - name: Install EAS CLI
         run: npm install --global eas-cli
+      - name: Link existing Expo project
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: eas project:init --account rjdilip79s-team --non-interactive
       - name: Build Android
         if: github.event.inputs.platform == 'all' || github.event.inputs.platform == 'android'
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        run: eas build --platform android --profile production --non-interactive
+        run: eas build --platform android --profile preview --non-interactive
       - name: Build iOS
         if: github.event.inputs.platform == 'all' || github.event.inputs.platform == 'ios'
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        run: eas build --platform ios --profile production --non-interactive
+        run: eas build --platform ios --profile preview --non-interactive
