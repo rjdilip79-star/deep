@@ -10,7 +10,7 @@ on:
           - all
           - android
           - ios
-        default: all
+        default: android
 jobs:
   build:
     name: EAS build
@@ -26,10 +26,19 @@ jobs:
         run: npm install
       - name: Install EAS CLI
         run: npm install --global eas-cli
+      - name: Verify Expo token is configured
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: |
+          if [ -z "$EXPO_TOKEN" ]; then
+            echo "::error::EXPO_TOKEN is missing or empty. Add a valid Expo access token in GitHub Settings > Secrets and variables > Actions > Repository secrets."
+            exit 1
+          fi
+          echo "Expo token is present."
       - name: Link existing Expo project
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        run: eas project:init --account rjdilip79s-team --non-interactive
+        run: eas init --account rjdilip79s-team --force --non-interactive
       - name: Build Android
         if: github.event.inputs.platform == 'all' || github.event.inputs.platform == 'android'
         env:
