@@ -131,12 +131,12 @@ function Settings() {
     <Screen>
       <View style={panel(c)}>
         <Text style={{ color: c.tx }}>{t('name')}</Text>
-        <TextInput accessibilityLabel={t('name')} value={s.name} maxLength={16} onChangeText={v => set(p => ({ ...p, name: v }))} style={{ color: c.tx, borderWidth: 1, borderColor: c.bd, borderRadius: 10, padding: 10, marginTop: 6 }} />
-        <View style={{ marginTop: 16 }}><Text style={{ color: c.tx }}>{t('lang')}</Text>{seg([['en', 'English'], ['ne', 'नेपाली']], s.lang, v => set(p => ({ ...p, lang: v as Lang })))}</View>
-        <View style={{ marginTop: 16 }}><Text style={{ color: c.tx }}>{t('theme')}</Text>{seg([['auto', 'Auto'], ['dark', t('dark')], ['light', t('light')]], s.theme, v => set(p => ({ ...p, theme: v as St['theme'] })))}</View>
-        {sw(t('sound'), s.sound, b => { set(p => ({ ...p, sound: b })); })}
-        {sw(t('haptics'), s.haptics, b => { set(p => ({ ...p, haptics: b })); })}
-        <Btn ghost label={t('reset')} onPress={() => Alert.alert(t('reset'), t('sure'), [{ text: t('cancel'), style: 'cancel' }, { text: t('ok'), style: 'destructive', onPress: () => set(p => ({ ...INIT, lang: p.lang, theme: p.theme, sound: p.sound, haptics: p.haptics })) }])} />
+        <TextInput accessibilityLabel={t('name')} value={s.name} maxLength={16} onChangeText={v => set((p: St) => ({ ...p, name: v }))} style={{ color: c.tx, borderWidth: 1, borderColor: c.bd, borderRadius: 10, padding: 10, marginTop: 6 }} />
+        <View style={{ marginTop: 16 }}><Text style={{ color: c.tx }}>{t('lang')}</Text>{seg([['en', 'English'], ['ne', 'नेपाली']], s.lang, v => set((p: St) => ({ ...p, lang: v as Lang })))}</View>
+        <View style={{ marginTop: 16 }}><Text style={{ color: c.tx }}>{t('theme')}</Text>{seg([['auto', 'Auto'], ['dark', t('dark')], ['light', t('light')]], s.theme, v => set((p: St) => ({ ...p, theme: v as St['theme'] })))}</View>
+        {sw(t('sound'), s.sound, b => { set((p: St) => ({ ...p, sound: b })); })}
+        {sw(t('haptics'), s.haptics, b => { set((p: St) => ({ ...p, haptics: b })); })}
+        <Btn ghost label={t('reset')} onPress={() => Alert.alert(t('reset'), t('sure'), [{ text: t('cancel'), style: 'cancel' }, { text: t('ok'), style: 'destructive', onPress: () => set((p: St) => ({ ...INIT, lang: p.lang, theme: p.theme, sound: p.sound, haptics: p.haptics })) }])} />
       </View>
     </Screen>
   );
